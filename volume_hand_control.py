@@ -4,7 +4,7 @@ import time
 import hand_tracker_module as htm
 import math
 ## code from pycaw https://github.com/andremiras/pycaw
-# the below libraries worked well on my laptop but not on the RPi
+# the below libraries worked well on my laptop but not on the RPi 4
 from ctypes import cast, POINTER
 from comtypes import CLSCTX_ALL
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
