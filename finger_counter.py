@@ -30,13 +30,35 @@ while True:
     # https://google.github.io/mediapipe/solutions/hands
     fingerCount = []
     if len(lmList) != 0:
-        # [A][B] => B refers to the index, x, and y values, where index is the same as the A valu e
+        # [A][B] => B refers to the index, x, and y values, where index is the same as the A value
         # for the thumb left hand
         # would need to account for left and right if wanted to check the right hand
-        if lmList[lstFingerTips[0]][1] < lmList[lstFingerTips[0]-1][1]:
-            fingerCount.append(1)
+
+        # check if left or right hand by checking the x-value of the thumb relative to the little fingertip x value
+        rightHand = False
+        leftHand = False
+        if lmList[lstFingerTips[4]][1] < lmList[lstFingerTips[0]][1]:
+            print("right")
+            rightHand = True
+        elif lmList[lstFingerTips[4]][1] > lmList[lstFingerTips[0]][1]:
+            print("left")
+            leftHand = True
         else:
-            fingerCount.append(0)
+            print("error understanding which hand is being shown")
+
+        #decide which hand is being shown for the thumb to either count or not
+        if leftHand:
+            if lmList[lstFingerTips[0]][1] < lmList[lstFingerTips[0]-1][1]:
+                fingerCount.append(1)
+            else:
+                fingerCount.append(0)
+        elif rightHand:
+            if lmList[lstFingerTips[0]][1] > lmList[lstFingerTips[0]-1][1]:
+                fingerCount.append(1)
+            else:
+                fingerCount.append(0)
+        else:
+            print("not sure which hand is being shown")
 
         # for the other 4 fingers, regardless of which hand
         for id in range(1, 5):
