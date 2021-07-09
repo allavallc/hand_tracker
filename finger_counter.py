@@ -1,3 +1,4 @@
+# this is based on the computervision.zone website
 import cv2
 import os
 import time
